@@ -24,7 +24,7 @@ jobs:
       - name: Run a script
         run: |
           AUTH_KEY=${{ secrets.AUTH_KEY }}
-          ./get-auth.sh
+          bash ./get-auth.sh
         shell: bash
 
       - name: Coverity Full Scan
