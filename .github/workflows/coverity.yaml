@@ -24,7 +24,7 @@ jobs:
       - name: Run a script
         run: |
           AUTH_KEY=${{ secrets.AUTH_KEY }}
-          echo ${{ secrets.AUTH_KEY }} > "./auth-key.txt"
+          echo "${{ secrets.AUTH_KEY }}" > "./auth-key.txt"
           chmod 400 auth-key.txt
         shell: bash
 
