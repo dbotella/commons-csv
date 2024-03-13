@@ -22,7 +22,10 @@ jobs:
           distribution: microsoft
           cache: maven
       - name: Run a script
-        run: ./get-auth.sh ${{ secrets.AUTH_KEY }}
+        run: |
+          ./get-auth.sh ${{ secrets.AUTH_KEY }}
+        shell: bash
+
       - name: Coverity Full Scan
         if: ${{ github.event_name != 'pull_request' }}
         uses: synopsys-sig/synopsys-action@v1.8.0
