@@ -63,7 +63,7 @@ analyze:
 
 commit:
   connect:
-    auth-key-file: auth-key.txt
+    auth-key-file: auth-key.txt 
     stream: commons-csv 
     url: http://k8s-cnc-ingressc-61c9622481-902802279.eu-west-1.elb.amazonaws.com/
     on-new-cert: trust 
