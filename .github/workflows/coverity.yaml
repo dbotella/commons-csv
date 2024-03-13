@@ -25,7 +25,6 @@ jobs:
         run: |
           echo "${{ secrets.AUTH_KEY }}" > "./auth-key.txt"
           chmod 400 auth-key.txt
-          cat auth-key.txt
         shell: bash
 
       - name: Coverity Full Scan
