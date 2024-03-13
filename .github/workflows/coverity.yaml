@@ -23,7 +23,8 @@ jobs:
           cache: maven
       - name: Run a script
         run: |
-          ./get-auth.sh ${{ secrets.AUTH_KEY }}
+          AUTH_KEY=${{ secrets.AUTH_KEY }}
+          ./get-auth.sh
         shell: bash
 
       - name: Coverity Full Scan
