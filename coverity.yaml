@@ -1,69 +1,57 @@
+# Coverity configuration file.
+# The schema is available here: <install-dir>/doc/configuration-schema.json
+# For help on individual settings:      coverity help config --setting <setting>
+# For a complete example configuration: coverity help config --show-all
+# For help on configuration syntax:     coverity help config --syntax
+
 analyze:
-  location: local
+  # Specifies the aggressiveness level for the analysis. The aggressiveness
+  # level causes the analysis to make more or less aggressive assumptions
+  # during the analysis where the higher the aggressiveness level the more
+  # defects are reported.
+  # Valid values:
+  #   low
+  #   medium
+  #   high
+  aggressiveness-level: high
+
   checkers:
+    # Indicates whether all checkers should be enabled.
     all: true
-    webapp-security:
-      enabled: true
+
     checker-config:
-      AUDIT.SPECULATIVE_EXECUTION_DATA_LEAK :
+      CONFIG.HARDCODED_CREDENTIALS_AUDIT:
         enabled: true
-      COM.ADDROF_LEAK :
-        enabled: true
-      COM.BSTR.ALLOC :
-        enabled: true
-      COM.BSTR.BAD_COMPARE :
-        enabled: true
-      COM.BSTR.NE_NON_BSTR :
-        enabled: true
-      DC.STRING_BUFFER :
-        enabled: true
-      ENUM_AS_BOOLEAN :
-        enabled: true
-      EXPOSED_NON_CONST_STATIC :
-        enabled: true
-      FLOATING_POINT_EQUALITY :
-        enabled: true
-      HARDCODED_CREDENTIALS :
-        enabled: true
-      HFA :
-        enabled: true
-      INEFFECTIVE_MOVE :
-        enabled: true
-      PARSE_ERROR :
-        enabled: true
-      OVERLY_BROAD_EXCEPTION :
-        enabled: true
-      ODR_VIOLATION :
-        enabled: true
-      REVERSE_OVERRUN :
-        enabled: true
-      RISKY_CRYPTO :
-        enabled: true
-      STACK_USE :
-        enabled: true
-      UNENCRYPTED_SENSITIVE_DATA :
-        enabled: true
-      VCALL_IN_CTOR_DTOR :
-        enabled: true
-      WEAK_GUARD :
-        enabled: true
-      WEAK_PASSWORD_HASH :
-        enabled: true
-      RISKY_CRYPTO :
-        enabled: true
-      REVERSE_OVERRUN :
-        enabled: true
-      INTEGER_OVERFLOW:
-        enabled: true
-        options:
-          enable_all_overflow_ops: true
+
+    # Specifies how web application security analysis should be done.
+    webapp-security:
+      # Enables the checkers that are used for web application security
+      # analysis.
+      enabled: true
+
+      # Sets the web application checkers aggressiveness level.
+      # Valid values:
+      #   low
+      #   medium
+      #   high
+      aggressiveness-level: high
+
+  # Analysis mode: "pfi" (perfect fidelity incremental) for complete analysis;
+  # or "hfi" (high fidelity incremental) for analysis of only specific files
+  # specified by analyze.files settings, omitting any other files which may
+  # have been incidentally captured by the build. An "hfi" analysis can be
+  # faster but may produce results which are incomplete or inconsistent, due to
+  # the lack of context, and should be used only when speed is more important
+  # than accuracy.
+  # Valid values:
+  #   hfi
+  #   pfi
+  # mode: pfi
   trust:
     all: false
 
-
 commit:
   connect:
-    auth-key-file: auth-key.txt 
-    stream: commons-csv 
-    url: http://k8s-cnc-ingressc-61c9622481-902802279.eu-west-1.elb.amazonaws.com/
-    on-new-cert: trust 
+    stream: commons-csv
+    url: http://k8s-cnc-cnc-17ee5478de-1887385795.eu-west-1.elb.amazonaws.com
+    on-new-cert: trust
