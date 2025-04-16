@@ -53,5 +53,4 @@ analyze:
 commit:
   connect:
     stream: commons-csv
-    url: http://k8s-cnc-cnc-17ee5478de-1887385795.eu-west-1.elb.amazonaws.com
     on-new-cert: trust

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #================================================================================
-# Title       : coverity_incremental.sh
+# Title       : coverity_full.sh
 # Author      : Didier Botella
 # Version     : 1.2
 # Date        : 2025-04-16
-# Description : Make an incremental  analysis
+# Description : Make a full analysis
 #================================================================================
 
 # À ajouter après le source des variables
@@ -37,11 +37,12 @@ export COV_IDIR=idir
 export COV_PROJECT=commons-csv
 export COV_STREAM=commons-csv
 
+rm -rf "$COV_IDIR"
+mvn clean
+
 coverity scan \
-    --incremental \
-    -o analyze.mode=hfi \
     -o commit.connect.url="$COVERITY_URL" \
     -o commit.connect.project="$COV_PROJECT" \
     -o commit.connect.stream="$COV_STREAM" \
     --dir "$COV_IDIR" \
-    -- mvn -Ddoclint=all --show-version --batch-mode --no-transfer-progress -Drat.skip=true -Dmaven.test.skip=true install
+    -- mvn -Ddoclint=all --show-version --batch-mode --no-transfer-progress -Drat.skip=true install
